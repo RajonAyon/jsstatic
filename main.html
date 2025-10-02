@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>pha_positions_async.json</h1>
+    <pre id="jsonDisplay">Loading JSON...</pre>
+
+    <script>
+        fetch('pha_positions_async.json')
+            .then(response => {
+                if (!response.ok) throw new Error("File not found");
+                return response.json();
+            })
+            .then(data => {
+                // Pretty-print JSON
+                document.getElementById('jsonDisplay').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('jsonDisplay').textContent = "Error loading JSON: " + error;
+            });
+    </script>
+</body>
+</html>
